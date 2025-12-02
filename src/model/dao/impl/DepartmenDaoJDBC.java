@@ -57,12 +57,12 @@ public class DepartmenDaoJDBC implements DepartmentDao {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void deleteById(Long id) {
         PreparedStatement pstm = null;
         try {
             pstm = conn.prepareStatement("DELETE FROM department WHERE Id = ?");
 
-            pstm.setInt(1, id);
+            pstm.setLong(1, id);
             pstm.executeUpdate();
         } catch (SQLException e) {
             throw new DbException(e.getMessage());
@@ -72,12 +72,12 @@ public class DepartmenDaoJDBC implements DepartmentDao {
     }
 
     @Override
-    public Department findById(Integer id) {
+    public Department findById(Long id) {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         try {
             pstm = conn.prepareStatement("SELECT * FROM department WHERE Id = ?");
-            pstm.setInt(1, id);
+            pstm.setLong(1, id);
             rs = pstm.executeQuery();
             Department dep = new Department();
             if (rs.next()) {

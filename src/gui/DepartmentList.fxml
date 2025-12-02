@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="693.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.DeparmentListController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="526.0" prefWidth="693.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.DepartmentListController">
    <children>
       <Label text="Department Registration">
          <font>
@@ -32,6 +32,8 @@
         <columns>
           <TableColumn fx:id="tableCollumId" prefWidth="75.0" text="Id" />
           <TableColumn fx:id="tableCollumName" prefWidth="75.0" text="Name" />
+            <TableColumn fx:id="tableCollumnEdit" prefWidth="75.0" />
+            <TableColumn fx:id="tableCollumnRemove" prefWidth="75.0" />
         </columns>
       </TableView>
    </children>
