@@ -20,7 +20,7 @@ public class SellerDaoJDBC implements SellerDao {
     }
 
     @Override
-    public void inser(Seller sl) {
+    public void insert(Seller sl) {
         PreparedStatement pstm = null;
         try {
             pstm = conn.prepareStatement(
@@ -79,12 +79,12 @@ public class SellerDaoJDBC implements SellerDao {
     }
 
     @Override
-    public void delete(Integer id) {
+    public void deleteById(Long id) {
         PreparedStatement pstm = null;
         try {
             pstm = conn.prepareStatement("DELETE FROM seller WHERE id = ?");
 
-            pstm.setInt(1, id);
+            pstm.setLong(1, id);
             pstm.executeUpdate();
         }catch (SQLException e){
             throw  new DbException(e.getMessage());
@@ -94,7 +94,7 @@ public class SellerDaoJDBC implements SellerDao {
     }
 
     @Override
-    public Seller findById(Integer id) {
+    public Seller findById(Long id) {
         PreparedStatement pstm = null;
         ResultSet rs = null;
         try {
@@ -103,7 +103,7 @@ public class SellerDaoJDBC implements SellerDao {
                             + "FROM seller INNER JOIN department "
                             + "ON seller.DepartmentId = department.Id "
                             + "WHERE seller.Id = ?");
-            pstm.setInt(1, id);
+            pstm.setLong(1, id);
             rs = pstm.executeQuery();
             if (rs.next()) {
                 Department dep = instantiateDepartment(rs);
@@ -198,8 +198,9 @@ public class SellerDaoJDBC implements SellerDao {
         Seller sl = new Seller();
         sl.setId(rs.getLong("Id"));
         sl.setName(rs.getString("Name"));
+        sl.setEmail(rs.getString("Email"));
         sl.setBaseSalary(rs.getDouble("BaseSalary"));
-        sl.setBirthDate(rs.getDate("BirthDate"));
+        sl.setBirthDate(new java.util.Date(rs.getTimestamp("BirthDate").getTime()));
         sl.setDepartment(dep);
         return sl;
     }
